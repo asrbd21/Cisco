@@ -24,8 +24,13 @@ switchport trunk allowed vlan add 10,20
 exit
 int vlan 1
 no shut
-ip address 192.168.1.250
+ip address 192.168.1.250 255.255.255.0
+end
+int vlan 10 
+ip address 192.168.10.250 255.255.255.0
+end
+int vlan 20
+ip address 192.168.20.250 255.255.255.0
 end
 wr
 copy running-config startup-config
-
