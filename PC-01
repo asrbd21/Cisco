@@ -1,0 +1,3 @@
+netsh nap client grouppolicy 
+netsh nap client show state
+

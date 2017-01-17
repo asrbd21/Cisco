@@ -1,6 +1,8 @@
 en
 conf t
 hostname SW1
+#logging console debugging
+no logging console
 vlan 10
 name vlan COMPLIANT
 exit
@@ -12,8 +14,6 @@ conf t
 int g0/0
 switchport mode access
 switchport access vlan 10
-exit
-logging console debugging
 exit
 end
 conf t
