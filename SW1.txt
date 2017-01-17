@@ -1,0 +1,28 @@
+en
+conf t
+hostname SW1
+vlan 10
+name vlan COMPLIANT
+exit
+vlan 20
+name vlan NONCOMPLIANT
+exit
+end
+conf t
+int g0/0
+switchport mode access
+switchport access vlan 10
+exit
+logging console debugging
+exit
+end
+conf t
+int g0/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan add 10,20
+exit
+end
+wr
+copy running-config startup-config
+
