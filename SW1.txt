@@ -9,30 +9,28 @@ exit
 vlan 20
 name vlan NONCOMPLIANT
 exit
-end
-conf t
 int g0/0
 switchport mode access
 switchport access vlan 10
 exit
-end
-conf t
 int g0/3
 switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan add 10,20
 exit
-conf t
 int vlan 1
 no shut
 ip address 192.168.1.250 255.255.255.0
-end
-int vlan 10 
-ip address 192.168.10.250 255.255.255.0
-end
-int vlan 20
-ip address 192.168.20.250 255.255.255.0
-end
 exit
+int vlan 10 
+no shut
+ip address 192.168.10.250 255.255.255.0
+exit
+int vlan 20
+no shut
+ip address 192.168.20.250 255.255.255.0
+exit
+end
 wr
 copy running-config startup-config
+
