@@ -1,4 +1,5 @@
 en
+terminal length 0
 conf t
 hostname SW1
 logging console debugging
@@ -30,6 +31,27 @@ int vlan 20
 no shut
 ip address 192.168.20.250 255.255.255.0
 exit
+end
+conf t
+dot1x system-auth-control
+dot1x guest-vlan supplicant
+aaa new-model
+radius server NPS
+address ipv4 192.168.1.11 auth-port 1812 acct-port 1813
+key Secret01
+exit
+aaa authentication dot1x default group radius
+aaa authorization network default group radius 
+aaa accounting dot1x default start-stop group radius
+aaa session-id common
+int g0/0
+switchport mode access
+authentication event fail action authorize vlan 20
+authentication port-control auto
+dot1x pae authenticator
+dot1x timeout quiet-period 5
+dot1x timeout server-timeout 10
+dot1x max-reauth-req 3
 end
 wr
 copy running-config startup-config
