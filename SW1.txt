@@ -22,6 +22,7 @@ switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan add 10,20
 exit
+conf t
 int vlan 1
 no shut
 ip address 192.168.1.250 255.255.255.0
@@ -32,5 +33,6 @@ end
 int vlan 20
 ip address 192.168.20.250 255.255.255.0
 end
+exit
 wr
 copy running-config startup-config
