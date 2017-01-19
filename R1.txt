@@ -3,18 +3,31 @@ conf t
 int g0/0
 no shut
 ip address 192.168.1.254 255.255.255.0
+description vlan1
+ip nat inside
 exit
 int g0/0.10
 encapsulation dot1Q 10
 ip address 192.168.10.254 255.255.255.0
 ip helper-address 192.168.1.100
+description vlan10
 exit
 int g0/0.20
 encapsulation dot1Q 20
 ip address 192.168.20.254 255.255.255.0
 ip helper-address 192.168.1.100
+description vlan20
 exit
+int g1/0
+no shut
+ip address dhcp
+description wan
+ip nat outside
+exit
+access-list 1 permit 192.168.0.0 0.0.255.255
+ip nat inside source list 1 interface gigabitethernet 1/0 overload
 end
 wr
+
 copy running-config startup-config
 
